@@ -10,7 +10,7 @@ export class WPEditor {
 
     // Axios klient för API-anrop
     private static client = axios.create({
-        baseURL: 'http://localhost/project/wordpress/wp-json/wp-editor/v1'
+        baseURL: 'http://localhost/project1/wordpress/wp-json/wp-editor/v1'
     });
     // Standardkonfiguration för API-anrop
     private static config: AxiosRequestConfig = {

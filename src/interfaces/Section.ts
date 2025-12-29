@@ -5,5 +5,5 @@
 export interface Section {
   id: number;
   type: string;
-  data: object;
+  data: any;
 }

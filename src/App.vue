@@ -58,7 +58,7 @@ watch(() => siteConfigStore.config?.seo_settings.favicon?.url, (faviconUrl) => {
       <Sidebar class="sidebar z-10"
         :style="{ backgroundColor: siteConfigStore.config?.color_settings.secondary_color, color: siteConfigStore.config?.color_settings.secondary_text_color }" />
       <div class="main">
-        <router-view class="mr-auto mt-4 container" />
+        <router-view />
       </div>
     </div>
     <Footer class="footer"
