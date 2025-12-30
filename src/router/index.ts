@@ -10,6 +10,10 @@ const router = createRouter({
     {
       path: '/news/:newsslug',
       component: () => import('@/components/views/SingleNewsPage.vue'),
+    },
+    {
+      path: '/login',
+      component: () => import('@/components/views/Login.vue'),
     }
   ]
 });

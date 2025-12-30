@@ -9,7 +9,6 @@ let newsItem = ref<NewsItem | null>(null);
 onMounted(async () => {
     const slug = router.currentRoute.value.params.newsslug as string;
     newsItem.value = await WPEditor.getSingleNews(slug);
-    console.log(newsItem.value);
 });
 
 </script>
