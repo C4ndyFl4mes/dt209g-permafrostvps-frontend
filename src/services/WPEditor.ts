@@ -2,6 +2,7 @@ import axios, { type AxiosResponse, type AxiosRequestConfig, type RawAxiosReques
 import type { Section } from '@/interfaces/Section';
 import type { MenuItem } from '@/interfaces/MenuItem';
 import type { SiteConfig } from '@/interfaces/SiteConfig';
+import type { NewsItem } from '@/interfaces/NewsItem';
 
 /**
  * WPEditor service hanterar kommunikationen med WordPress Editor API.
@@ -45,6 +46,11 @@ export class WPEditor {
      */
     public static async getSiteConfig(): Promise<SiteConfig> {
         const response: AxiosResponse<SiteConfig> = await this.client.get('/site-config', this.config);
+        return response.data;
+    }
+
+    public static async getSingleNews(slug: string): Promise<NewsItem> {
+        const response: AxiosResponse<NewsItem> = await this.client.get(`/news?slug=${slug}`, this.config);
         return response.data;
     }
 }

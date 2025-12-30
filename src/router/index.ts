@@ -7,6 +7,10 @@ const router = createRouter({
       path: '/:slug',
       component: () => import('@/components/views/Page.vue'),
     },
+    {
+      path: '/news/:newsslug',
+      component: () => import('@/components/views/SingleNewsPage.vue'),
+    }
   ]
 });
 

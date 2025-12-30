@@ -7,6 +7,8 @@ import Banner from '@/components/sections/Banner.vue';
 import PageTitle from '@/components/sections/PageTitle.vue';
 import TierCards from '@/components/sections/TierCards.vue';
 import TextContent from '@/components/sections/TextContent.vue';
+import SupportCards from '@/components/sections/SupportCards.vue';
+import News from '@/components/sections/News.vue';
 
 const route = useRoute();
 const sections = ref<Section[]>([]);
@@ -17,6 +19,8 @@ const componentMap: Record<string, Component> = {
     'header': PageTitle,
     'tiercards': TierCards,
     'text': TextContent,
+    'support': SupportCards,
+    'news': News
 };
 
 
