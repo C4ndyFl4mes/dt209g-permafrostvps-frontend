@@ -2,19 +2,16 @@
 import { onMounted, ref, watch } from 'vue';
 import { RouterView } from 'vue-router';
 import { useSiteConfigStore } from '@/stores/siteConfig';
-import { useProfileStore } from './stores/profile';
 import Header from '@/components/layout/Header.vue';
 import Footer from '@/components/layout/Footer.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
 
 const siteConfigStore = useSiteConfigStore();
-const profileStore = useProfileStore();
 let state = ref(true);
 
 // Hämta webbplatskonfiguration och användarprofil vid montering
 onMounted(async () => {
   await siteConfigStore.fetchSiteConfig();
-  await profileStore.fetchUserProfile();
   
   // Close sidebar on mobile by default
   if (window.innerWidth < 1024) {
