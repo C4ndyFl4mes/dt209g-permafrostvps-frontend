@@ -1,37 +1,37 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import { useSiteConfigStore } from '@/stores/siteConfig';
-import { useProfileStore } from '@/stores/profile';
-import type { WPError } from '@/interfaces/WPError';
-import type { User } from '@/interfaces/User';
+// import { useProfileStore } from '@/stores/profile';
+// import type { WPError } from '@/interfaces/WPError';
+// import type { User } from '@/interfaces/User';
 
 const siteConfigStore = useSiteConfigStore();
-const profileStore = useProfileStore();
+// const profileStore = useProfileStore();
 
 const logoURL = computed(() => siteConfigStore.config?.seo_settings.logotype?.url || '');
 const logoALT = computed(() => siteConfigStore.config?.seo_settings.logotype?.alt || '');
 
-let user = ref<User | WPError | null>(null);
-let loggingOut = ref<boolean>(false);
+// let user = ref<User | WPError | null>(null);
+// let loggingOut = ref<boolean>(false);
 
 // Hämta användarprofil om inloggad
-watch(() => profileStore.user, (newUser) => {
-    if (newUser) {
-        if ('success' in newUser) {
-            user.value = newUser.user;
-        } else if ('code' in newUser) {
-            user.value = null;
-        }
-    } else {
-        user.value = null;
-    }
-}, { immediate: true });
+// watch(() => profileStore.user, (newUser) => {
+//     if (newUser) {
+//         if ('success' in newUser) {
+//             user.value = newUser.user;
+//         } else if ('code' in newUser) {
+//             user.value = null;
+//         }
+//     } else {
+//         user.value = null;
+//     }
+// }, { immediate: true });
 
-async function logout() {
-    loggingOut.value = true;
-    await profileStore.logout();
-    loggingOut.value = false;
-}
+// async function logout() {
+//     loggingOut.value = true;
+//     await profileStore.logout();
+//     loggingOut.value = false;
+// }
 </script>
 
 <template>
@@ -39,7 +39,7 @@ async function logout() {
         <div class="p-2">
             <img :src="logoURL" :alt="logoALT" class="h-16 inline-block mr-4" />
         </div>
-        <div class="my-auto p-2">
+        <!-- <div class="my-auto p-2">
             <div v-if="!loggingOut">
             <div v-if="user && 'id' in user" class="flex items-center gap-x-2">
                 <p class="mr-4" v-if="user.username">{{ user.username }}</p>
@@ -61,7 +61,7 @@ async function logout() {
             <div v-else class="flex items-center justify-center">
                 <span class="text-gray-600">Logging out...</span>
             </div>
-        </div>
+        </div> -->
     </header>
 </template>
 

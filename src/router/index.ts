@@ -11,10 +11,14 @@ const router = createRouter({
       path: '/news/:newsslug',
       component: () => import('@/components/views/SingleNewsPage.vue'),
     },
-    {
-      path: '/login',
-      component: () => import('@/components/views/Login.vue'),
-    }
+    // {
+    //   path: '/login',
+    //   component: () => import('@/components/views/Login.vue'),
+    // },
+    // {
+    //   path: '/chats',
+    //   component: () => import('@/components/views/Chats.vue'),
+    // }
   ]
 });
 

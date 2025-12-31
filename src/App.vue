@@ -15,7 +15,24 @@ let state = ref(true);
 onMounted(async () => {
   await siteConfigStore.fetchSiteConfig();
   await profileStore.fetchUserProfile();
+  
+  // Close sidebar on mobile by default
+  if (window.innerWidth < 1024) {
+    state.value = false;
+  }
+  
+  // Add resize listener to close sidebar on mobile
+  window.addEventListener('resize', handleResize);
 });
+
+/**
+ * Stänger sidofältet på mobila enheter vid ändring av fönsterstorlek.
+ */
+function handleResize() {
+  if (window.innerWidth < 1024) {
+    state.value = false;
+  }
+}
 
 /**
  * Övervakar ändringar i favicon-URL och uppdaterar dokumentets favicon.
@@ -30,9 +47,7 @@ watch(() => siteConfigStore.config?.seo_settings.favicon?.url, (faviconUrl) => {
     }
     link.href = faviconUrl;
   }
-}, { immediate: true });
-
-</script>
+}, { immediate: true });</script>
 
 <template>
   <div class="page-wrapper">
