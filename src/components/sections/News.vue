@@ -8,7 +8,6 @@ const { data } = defineProps<{
 </script>
 
 <template>
-    <h1 class="text-3xl font-bold mb-2">Latest News</h1>
     <div v-if="data" class="flex flex-col gap-6 mb-5">
         <article v-for="item in data?.news" :key="item.id" class="border-b pb-4 flex flex-col md:grid md:grid-cols-[auto_1fr]">
             <div class="w-fit rounded-2xl overflow-hidden mr-2 mb-2">

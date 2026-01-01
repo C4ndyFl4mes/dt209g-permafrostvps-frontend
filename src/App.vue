@@ -13,12 +13,12 @@ let state = ref(true);
 onMounted(async () => {
   await siteConfigStore.fetchSiteConfig();
   
-  // Close sidebar on mobile by default
+  // Stäng sidofältet på mobila enheter vid initial laddning
   if (window.innerWidth < 1024) {
     state.value = false;
   }
   
-  // Add resize listener to close sidebar on mobile
+  // Lägg till resize-lyssnare för att stänga sidofältet på mobila enheter
   window.addEventListener('resize', handleResize);
 });
 
@@ -44,22 +44,23 @@ watch(() => siteConfigStore.config?.seo_settings.favicon?.url, (faviconUrl) => {
     }
     link.href = faviconUrl;
   }
-}, { immediate: true });</script>
+}, { immediate: true });
+</script>
 
 <template>
   <div class="page-wrapper">
     <Header class="header"
-      :style="{ backgroundColor: siteConfigStore.config?.color_settings.secondary_color, color: siteConfigStore.config?.color_settings.secondary_text_color }" />
-    <div :style="{ backgroundColor: siteConfigStore.config?.color_settings.secondary_color }" class="w-full py-2">
+      :style="{ backgroundColor: '#f1f5f9', color: '#1e293b' }" />
+    <div :style="{ backgroundColor: '#f1f5f9' }" class="w-full py-2">
       <div :class="[
         'flex',
-        'w-64', // 16rem, same as sidebar
+        'w-64',
         siteConfigStore.config && siteConfigStore.config.layout_settings.sidebar_position === 'right' ? 'ml-auto' : 'mr-auto'
       ]">
         <div class="flex w-full justify-center h-full items-center">
           <button @click="state = !state"
             class="w-[75%] py-1 rounded hover:brightness-95 text-base font-medium transition-colors duration-200 cursor-pointer"
-            :style="{ backgroundColor: siteConfigStore.config?.color_settings.button_color, color: siteConfigStore.config?.color_settings.button_text_color }">
+            :style="{ backgroundColor: '#3b82f6', color: '#ffffff' }">
             {{ state ? 'Hide' : 'Show' }} Menu
           </button>
         </div>
@@ -71,13 +72,13 @@ watch(() => siteConfigStore.config?.seo_settings.favicon?.url, (faviconUrl) => {
       !state ? 'closed' : ''
     ]">
       <Sidebar class="sidebar z-10"
-        :style="{ backgroundColor: siteConfigStore.config?.color_settings.secondary_color, color: siteConfigStore.config?.color_settings.secondary_text_color }" />
+        :style="{ backgroundColor: '#f1f5f9', color: '#1e293b' }" />
       <div class="main">
         <router-view />
       </div>
     </div>
     <Footer class="footer"
-      :style="{ backgroundColor: siteConfigStore.config?.color_settings.secondary_color, color: siteConfigStore.config?.color_settings.secondary_text_color }" />
+      :style="{ backgroundColor: '#f1f5f9', color: '#1e293b' }" />
   </div>
 </template>
 

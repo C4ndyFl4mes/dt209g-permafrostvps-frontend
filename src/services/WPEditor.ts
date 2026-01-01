@@ -3,6 +3,7 @@ import type { Section } from '@/interfaces/Section';
 import type { MenuItem } from '@/interfaces/MenuItem';
 import type { SiteConfig } from '@/interfaces/SiteConfig';
 import type { NewsItem } from '@/interfaces/NewsItem';
+import type { WPError } from '@/interfaces/WPError';
 
 /**
  * WPEditor service hanterar kommunikationen med WordPress Editor API.
@@ -11,7 +12,7 @@ export class WPEditor {
 
     // Axios klient för API-anrop
     private static client = axios.create({
-        baseURL: 'http://localhost/project1/wordpress/wp-json/wp-editor/v1'
+        baseURL: 'https://studenter.miun.se/~issv2400/writeable/project1/wordpress/wp-json/wp-editor/v1'
     });
     // Standardkonfiguration för API-anrop
     private static config: AxiosRequestConfig = {
@@ -25,8 +26,8 @@ export class WPEditor {
      * @param page_slug - Sid-slug för vilken sektioner ska hämtas.
      * @returns - En lista av sektioner.
      */
-    public static async getSections(page_slug: string): Promise<Section[]> {
-        const response: AxiosResponse<Section[]> = await this.client.get(`/sections?slug=${page_slug}`, this.config);
+    public static async getSections(page_slug: string): Promise<Section[] | WPError> {
+        const response: AxiosResponse<Section[] | WPError> = await this.client.get(`/sections?slug=${page_slug}`, this.config);
         return response.data;
     }
 
@@ -49,6 +50,11 @@ export class WPEditor {
         return response.data;
     }
 
+    /**
+     * Hämtar en enskild nyhetsartikel baserat på dess slug.
+     * @param slug - Nyhetsartikelns slug.
+     * @returns - En nyhetsartikel.
+     */
     public static async getSingleNews(slug: string): Promise<NewsItem> {
         const response: AxiosResponse<NewsItem> = await this.client.get(`/news?slug=${slug}`, this.config);
         return response.data;

@@ -1,16 +1,26 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
+import { useSiteConfigStore } from '@/stores/siteConfig';
 import type { NewsItem } from '@/interfaces/NewsItem';
 import { WPEditor } from '@/services/WPEditor';
-import router from '@/router';
 
+const route = useRoute();
 let newsItem = ref<NewsItem | null>(null);
+const siteConfigStore = useSiteConfigStore();
 
-onMounted(async () => {
-    const slug = router.currentRoute.value.params.newsslug as string;
-    newsItem.value = await WPEditor.getSingleNews(slug);
+// Hämta nyhetsartikel baserat på newslug
+watch(() => route.params.newsslug, async (newSlug) => {
+    if (newSlug) {
+        newsItem.value = await WPEditor.getSingleNews(newSlug as string);
+    }
+}, { immediate: true });
+
+// Uppdatera dokumentets titel baserat på nyhetsartikelns titel och webbplatsens titel
+watchEffect(() => {
+    const siteName = siteConfigStore.config?.seo_settings.website_title || '';
+    document.title = newsItem.value?.title ? `${newsItem.value.title} | ${siteName}` : siteName;
 });
-
 </script>
 
 <template>
