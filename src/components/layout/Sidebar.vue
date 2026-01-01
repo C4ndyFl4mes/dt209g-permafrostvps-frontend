@@ -38,7 +38,7 @@ function getDepth(item: MenuItem): number {
         <nav>
             <ul>
                 <li v-for="item in menuItems" :key="item.id" class="p-2" :style="{ marginLeft: `${getDepth(item)*0.75}rem`}">
-                   <RouterLink :to="`/${item.slug}`">{{ item.title }}</RouterLink>
+                   <RouterLink :to="`/${item.slug}`" active-class="underline font-bold">{{ item.title }}</RouterLink>
                 </li>
             </ul>
         </nav>
