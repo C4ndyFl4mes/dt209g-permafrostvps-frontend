@@ -13,7 +13,7 @@ const { data } = defineProps<{
 <template>
     <h2 class="text-2xl font-bold mb-2">Subscription Tiers</h2>
     <div v-if="data" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-        <div v-for="tier in data?.tierset" :key="tier.id"
+        <article v-for="tier in data?.tierset" :key="tier.id"
             class="border rounded-lg p-4 flex-1 md:min-w-75 shadow-md flex flex-col h-full">
             <h3 class="text-xl font-semibold mb-2">{{ tier.title }}</h3>
             <p class="text-2xl font-bold mb-4">{{ tier.monthly_cost }}</p>
@@ -29,7 +29,7 @@ const { data } = defineProps<{
                 @click="alertTier(tier.title)">
                 Select {{ tier.title }}
             </button>
-        </div>
+        </article>
     </div>
     <div v-else class="mb-5">
         <p>No tier data available.</p>
